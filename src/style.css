@@ -10,6 +10,12 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+#dark {
+  background-color: #46045e;
+  background-image: url(http://pets-images.dev-apis.com/pets/wallpaperB.jpg);
+  background-blend-mode: multiply;
+}
+
 .search-params {
   display: flex;
   flex-direction: column;

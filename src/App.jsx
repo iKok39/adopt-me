@@ -5,6 +5,7 @@ import Details from "./components/Details";
 import SearchParams from "./components/SearchParams";
 import { useState } from "react";
 import AdoptedPetContext from "./lib/AdoptedPetContext";
+import ThemeContext from "./lib/ThemeContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,19 +18,28 @@ const queryClient = new QueryClient({
 
 const App = () => {
   const adoptedPet = useState(null);
+  const [theme, setTheme] = useState("dark");
+
+  const toggleTheme = () => {
+    setTheme((current) => (current === "light" ? "dark" : "light"));
+  };
 
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <AdoptedPetContext.Provider value={adoptedPet}>
-          <header>
-            <a href="/">Adopt Me!</a>
-          </header>
-          <Routes>
-            <Route path="/details/:id" element={<Details />} />
-            <Route path="/" element={<SearchParams />} />
-          </Routes>
-        </AdoptedPetContext.Provider>
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+          <AdoptedPetContext.Provider value={adoptedPet}>
+            <div id={theme}>
+              <header>
+                <a href="/">Adopt Me!</a>
+              </header>
+              <Routes>
+                <Route path="/details/:id" element={<Details />} />
+                <Route path="/" element={<SearchParams />} />
+              </Routes>
+            </div>
+          </AdoptedPetContext.Provider>
+        </ThemeContext.Provider>
       </QueryClientProvider>
     </BrowserRouter>
   );
