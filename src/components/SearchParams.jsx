@@ -4,6 +4,7 @@ import useBreedList from "../lib/useBreedList";
 import Results from "./Results";
 import fetchSearch from "../lib/fetchSearch";
 import AdoptedPetContext from "../lib/AdoptedPetContext";
+import Pagination from "./Pagination";
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 const SearchParams = () => {
@@ -18,6 +19,12 @@ const SearchParams = () => {
 
   const results = useQuery(["search", requestParams], fetchSearch);
   const pets = results?.data?.pets ?? [];
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [petsPerPage] = useState(3);
+  const indexOfLastPet = currentPage * petsPerPage;
+  const indexOfFirstPet = indexOfLastPet - petsPerPage;
+  const currentPets = pets.slice(indexOfFirstPet, indexOfLastPet);
 
   return (
     <div className="search-params">
@@ -68,7 +75,12 @@ const SearchParams = () => {
         </label>
         <button>Submit</button>
       </form>
-      <Results pets={pets} />
+      <Results pets={currentPets} />
+      <Pagination
+        totalPets={pets.length}
+        petsPerPage={petsPerPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 };
