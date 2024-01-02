@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Details from "./components/Details";
 import SearchParams from "./components/SearchParams";
@@ -31,7 +31,7 @@ const App = () => {
           <AdoptedPetContext.Provider value={adoptedPet}>
             <div id={theme}>
               <header>
-                <a href="/">Adopt Me!</a>
+                <Link to="/">Adopt Me!</Link>
               </header>
               <Routes>
                 <Route path="/details/:id" element={<Details />} />
