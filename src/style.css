@@ -20,6 +20,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   gap: 10px;
   width: 1100px;
   height: 100vh;
@@ -60,9 +61,12 @@ body {
   box-shadow: 0px 0px 12px #aaa, -0px -0px 12px purple;
 }
 
+#dark .search h1 {
+  color: #faeff0;
+}
+
 .pagination {
   display: flex;
-  position: absolute;
   bottom: 0;
 }
 
@@ -296,6 +300,10 @@ header {
 #modal .buttons button {
   display: inline-block;
   margin-right: 15px;
+}
+
+#dark .theme label {
+  color: #faeff0;
 }
 
 @media only screen and (max-width: 1129px) {

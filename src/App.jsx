@@ -6,6 +6,7 @@ import SearchParams from "./components/SearchParams";
 import { useState } from "react";
 import AdoptedPetContext from "./lib/AdoptedPetContext";
 import ThemeContext from "./lib/ThemeContext";
+import Switch from "react-switch";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,7 +30,9 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
           <AdoptedPetContext.Provider value={adoptedPet}>
-            <div id={theme}>
+            <div className="theme" id={theme}>
+              <label>{theme === "light" ? "Light Mode" : "Dark Mode"}</label>
+              <Switch onChange={toggleTheme} checked={theme === "dark"} />
               <header>
                 <Link to="/">Adopt Me!</Link>
               </header>
